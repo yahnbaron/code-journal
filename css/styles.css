@@ -1,0 +1,25 @@
+header {
+  background-color: #562a81;
+  color: white;
+  font-size: 18px;
+}
+
+body {
+  background-color: #f0f0f0;
+}
+
+label,
+input {
+  display: block;
+}
+
+img {
+  max-height: 350px;
+  width: 100%;
+  object-fit: cover;
+}
+
+input,
+textarea {
+  width: 100%;
+}
