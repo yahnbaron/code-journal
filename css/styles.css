@@ -21,5 +21,29 @@ img {
 
 input,
 textarea {
+  padding-bottom: 5px;
+  padding-top: 5px;
   width: 100%;
+  margin-bottom: 10px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+
+label {
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+.right {
+  text-align: right;
+}
+
+button {
+  margin: auto 10px;
+  background-color: #562a81;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-size: 10px;
+  border: none;
 }
