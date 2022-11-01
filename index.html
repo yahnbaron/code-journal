@@ -30,26 +30,26 @@
             <h2>New Entry</h2>
           </div>
         </div>
-        <form>
+        <form class="form">
           <div class="row">
             <div class="column-half">
               <img class="auto-update" src="images/placeholder-image-square.jpg">
             </div>
             <div class="column-half">
               <label for="title">Title</label>
-              <input type="text" id="title" required>
+              <input name="title" type="text" id="title" required>
               <label for="photoURL">Photo URL</label>
-              <input type="url" id="photoURL" required>
+              <input name="URL" type="url" id="photoURL" required>
             </div>
           </div>
           <div class="row">
             <div class="column-full">
               <label for="notes">Notes</label>
-              <textarea cols="40" rows="5" required></textarea>
+              <textarea name="notes" cols="40" rows="5" required></textarea>
             </div>
           </div>
           <div class="right">
-            <button>SAVE</button>
+            <button type="submit">SAVE</button>
           </div>
         </form>
       </div>
