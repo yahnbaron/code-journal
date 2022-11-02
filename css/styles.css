@@ -47,3 +47,9 @@ button {
   font-size: 10px;
   border: none;
 }
+
+ul,
+li {
+  list-style-type: none;
+  padding: 0;
+}
