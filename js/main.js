@@ -24,21 +24,25 @@ function subForm(event) {
   data.entries.unshift(formField);
   theForm.reset();
   theImgPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
+  theList.prepend(renderEntry(formField));
+  theFeedPage.className = 'feed-page';
+  theEntryForm.className = 'form-page hidden';
+  data.view = 'entries';
 }
 
-function renderTodo(entry) {
+function renderEntry(entry) {
   /**
    * <li class="column-full">
-            <div class="row">
-              <div class="column-half">
-                <img src="" title="ada lovelace">
-              </div>
-              <div class="column-half">
-                <h2>Ada Lovelace</h2>
-                <p>ada ada ada</p>
-              </div>
-            </div>
-          </li>
+       <div class="row">
+         <div class="column-half">
+           <img src="" title="ada lovelace">
+         </div>
+         <div class="column-half">
+           <h2>Ada Lovelace</h2>
+           <p>ada ada ada</p>
+         </div>
+       </div>
+    </li>
   */
 
   var theListItem = document.createElement('li');
@@ -78,7 +82,14 @@ document.addEventListener('DOMContentLoaded', addThem);
 
 function addThem(event) {
   for (var i = 0; i < data.entries.length; i++) {
-    theList.append(renderTodo(data.entries[i]));
+    theList.append(renderEntry(data.entries[i]));
+  }
+  if (data.view === 'entry-form') {
+    theFeedPage.className = 'feed-page hidden';
+    theEntryForm.className = 'form-page';
+  } else if (data.view === 'entries') {
+    theFeedPage.className = 'feed-page';
+    theEntryForm.className = 'form-page hidden';
   }
 }
 
@@ -87,6 +98,7 @@ theEntryNav.addEventListener('click', entriesNav);
 function entriesNav(event) {
   theFeedPage.className = 'feed-page';
   theEntryForm.className = 'form-page hidden';
+  data.view = 'entries';
 }
 
 theNewEntry.addEventListener('click', newEntry);
@@ -94,4 +106,5 @@ theNewEntry.addEventListener('click', newEntry);
 function newEntry(event) {
   theFeedPage.className = 'feed-page hidden';
   theEntryForm.className = 'form-page';
+  data.view = 'entry-form';
 }

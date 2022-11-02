@@ -87,7 +87,3 @@ a:hover {
 .hidden {
   display: none;
 }
-
-.unhidden {
-  display: unset;
-}
