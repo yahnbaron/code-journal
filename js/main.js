@@ -1,6 +1,10 @@
 var theURLInput = document.querySelector('#photoURL');
 var theImgPreview = document.querySelector('.auto-update');
 var theForm = document.querySelector('.form');
+var theEntryNav = document.querySelector('.entries-nav');
+var theNewEntry = document.querySelector('.new-entry');
+var theFeedPage = document.querySelector('.feed-page');
+var theEntryForm = document.querySelector('.form-page');
 
 theURLInput.addEventListener('input', updatePic);
 
@@ -76,4 +80,18 @@ function addThem(event) {
   for (var i = 0; i < data.entries.length; i++) {
     theList.append(renderTodo(data.entries[i]));
   }
+}
+
+theEntryNav.addEventListener('click', entriesNav);
+
+function entriesNav(event) {
+  theFeedPage.className = 'feed-page';
+  theEntryForm.className = 'form-page hidden';
+}
+
+theNewEntry.addEventListener('click', newEntry);
+
+function newEntry(event) {
+  theFeedPage.className = 'feed-page hidden';
+  theEntryForm.className = 'form-page';
 }
