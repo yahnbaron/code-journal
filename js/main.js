@@ -9,6 +9,8 @@ var theEntryOrEditText = document.querySelector('.entry-edit-text');
 var theDeleteButton = document.querySelector('.delete-entry');
 var theDeleteDiv = document.querySelector('.delete-conf-div');
 var theCloak = document.querySelector('.cloak-show');
+var theCancelDeleteButton = document.querySelector('.cancel-delete');
+// var theRealDeleteButton = document.querySelector('.confirm-delete');
 
 theURLInput.addEventListener('input', updatePic);
 
@@ -167,4 +169,11 @@ function clickDelete(event) {
   event.preventDefault();
   theDeleteDiv.className = 'delete-conf-div';
   theCloak.className = 'cloak-show';
+}
+
+theCancelDeleteButton.addEventListener('click', hideConfirms);
+
+function hideConfirms(event) {
+  theDeleteDiv.className = 'delete-conf-div hide-delete';
+  theCloak.className = 'cloak-show hide-delete';
 }
