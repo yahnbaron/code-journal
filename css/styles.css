@@ -87,3 +87,15 @@ a:hover {
 .hidden {
   display: none;
 }
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+  top: 20px;
+  right: 1px;
+  color: #562a81;
+  font-size: 20px;
+}
