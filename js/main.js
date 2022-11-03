@@ -5,6 +5,7 @@ var theEntryNav = document.querySelector('.entries-nav');
 var theNewEntry = document.querySelector('.new-entry');
 var theFeedPage = document.querySelector('.feed-page');
 var theEntryForm = document.querySelector('.form-page');
+var theEntryOrEditText = document.querySelector('.entry-edit-text');
 
 theURLInput.addEventListener('input', updatePic);
 
@@ -16,15 +17,29 @@ theForm.addEventListener('submit', subForm);
 
 function subForm(event) {
   event.preventDefault();
-  var formField = {};
-  formField.title = theForm.elements.title.value;
-  formField.photoURL = theForm.elements.URL.value;
-  formField.notes = theForm.elements.notes.value;
-  formField.entryId = data.nextEntryId++;
-  data.entries.unshift(formField);
+  if (data.editing === null) {
+    var formField = {};
+    formField.title = theForm.elements.title.value;
+    formField.photoURL = theForm.elements.URL.value;
+    formField.notes = theForm.elements.notes.value;
+    formField.entryId = data.nextEntryId++;
+    data.entries.unshift(formField);
+    theList.prepend(renderEntry(formField));
+  } else {
+    for (var x = 0; x < data.entries.length; x++) {
+      if (data.entries[x].entryId === parseInt(data.editing)) {
+        data.entries[x].title = theForm.elements.title.value;
+        data.entries[x].photoURL = theForm.elements.URL.value;
+        data.entries[x].notes = theForm.elements.notes.value;
+        var freshlyEditedElement = renderEntry(data.entries[x]);
+        var oldElement = document.querySelector('[data-entry-id="' + data.entries[x].entryId + '"]');
+        oldElement.replaceWith(freshlyEditedElement);
+        data.editing = null;
+      }
+    }
+  }
   theForm.reset();
   theImgPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
-  theList.prepend(renderEntry(formField));
   theFeedPage.className = 'feed-page';
   theEntryForm.className = 'form-page hidden';
   data.view = 'entries';
@@ -47,6 +62,8 @@ function renderEntry(entry) {
 
   var theListItem = document.createElement('li');
   theListItem.setAttribute('class', 'column-full');
+  theListItem.setAttribute('data-entry-id', entry.entryId);
+  theListItem.setAttribute('id', entry.entryId);
 
   var theDivRow = document.createElement('div');
   theDivRow.setAttribute('class', 'row');
@@ -62,7 +79,7 @@ function renderEntry(entry) {
   theDivHalfCol.append(thePic);
 
   var theOtherDivHalf = document.createElement('div');
-  theOtherDivHalf.setAttribute('class', 'column-half');
+  theOtherDivHalf.setAttribute('class', 'column-half relative');
 
   var theTitle = document.createElement('h3');
   theTitle.textContent = entry.title;
@@ -70,8 +87,11 @@ function renderEntry(entry) {
   var theNotes = document.createElement('p');
   theNotes.textContent = entry.notes;
 
+  var theIcon = document.createElement('i');
+  theIcon.setAttribute('class', 'fa-solid fa-pen absolute');
+
   theDivRow.append(theOtherDivHalf);
-  theOtherDivHalf.append(theTitle, theNotes);
+  theOtherDivHalf.append(theTitle, theNotes, theIcon);
 
   return theListItem;
 }
@@ -107,4 +127,31 @@ function newEntry(event) {
   theFeedPage.className = 'feed-page hidden';
   theEntryForm.className = 'form-page';
   data.view = 'entry-form';
+  theForm.elements.title.value = '';
+  theForm.elements.URL.value = '';
+  theForm.elements.notes.value = '';
+  theImgPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
+  theEntryOrEditText.textContent = 'New Entry';
+}
+
+theList.addEventListener('click', clickinTheList);
+
+function clickinTheList(event) {
+  if (event.target.nodeName === 'I') {
+    data.view = 'entry-form';
+    var theClickedLi = event.target.closest('li');
+    data.editing = theClickedLi.id;
+    theFeedPage.className = 'feed-page hidden';
+    theEntryForm.className = 'form-page';
+
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === parseInt(data.editing)) {
+        theForm.elements.title.value = data.entries[i].title;
+        theForm.elements.URL.value = data.entries[i].photoURL;
+        theForm.elements.notes.value = data.entries[i].notes;
+        theImgPreview.setAttribute('src', data.entries[i].photoURL);
+        theEntryOrEditText.textContent = 'Edit Entry';
+      }
+    }
+  }
 }
