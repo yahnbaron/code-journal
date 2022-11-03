@@ -34,6 +34,7 @@ function subForm(event) {
         var freshlyEditedElement = renderEntry(data.entries[x]);
         var oldElement = document.querySelector('[data-entry-id="' + data.entries[x].entryId + '"]');
         oldElement.replaceWith(freshlyEditedElement);
+        data.editing = null;
       }
     }
   }
