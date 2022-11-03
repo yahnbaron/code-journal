@@ -6,6 +6,7 @@ var theNewEntry = document.querySelector('.new-entry');
 var theFeedPage = document.querySelector('.feed-page');
 var theEntryForm = document.querySelector('.form-page');
 var theEntryOrEditText = document.querySelector('.entry-edit-text');
+var theDeleteButton = document.querySelector('.delete-entry');
 
 theURLInput.addEventListener('input', updatePic);
 
@@ -124,6 +125,7 @@ function entriesNav(event) {
 theNewEntry.addEventListener('click', newEntry);
 
 function newEntry(event) {
+  theDeleteButton.className = 'delete-entry hide-delete';
   theFeedPage.className = 'feed-page hidden';
   theEntryForm.className = 'form-page';
   data.view = 'entry-form';
@@ -138,6 +140,7 @@ theList.addEventListener('click', clickinTheList);
 
 function clickinTheList(event) {
   if (event.target.nodeName === 'I') {
+    theDeleteButton.className = 'delete-entry';
     data.view = 'entry-form';
     var theClickedLi = event.target.closest('li');
     data.editing = theClickedLi.id;

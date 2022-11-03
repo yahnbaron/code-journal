@@ -99,3 +99,16 @@ a:hover {
   color: #562a81;
   font-size: 20px;
 }
+
+.delete-entry {
+  position: absolute;
+  left: 5px;
+  background-color: #f0f0f0;
+  color: red;
+  text-decoration: underline;
+  font-size: 12px;
+}
+
+.hide-delete {
+  display: none;
+}
