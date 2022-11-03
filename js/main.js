@@ -6,6 +6,11 @@ var theNewEntry = document.querySelector('.new-entry');
 var theFeedPage = document.querySelector('.feed-page');
 var theEntryForm = document.querySelector('.form-page');
 var theEntryOrEditText = document.querySelector('.entry-edit-text');
+var theDeleteButton = document.querySelector('.delete-entry');
+var theDeleteDiv = document.querySelector('.delete-conf-div');
+var theCloak = document.querySelector('.cloak-show');
+var theCancelDeleteButton = document.querySelector('.cancel-delete');
+var theRealDeleteButton = document.querySelector('.confirm-delete');
 
 theURLInput.addEventListener('input', updatePic);
 
@@ -124,6 +129,7 @@ function entriesNav(event) {
 theNewEntry.addEventListener('click', newEntry);
 
 function newEntry(event) {
+  theDeleteButton.className = 'delete-entry hide-delete';
   theFeedPage.className = 'feed-page hidden';
   theEntryForm.className = 'form-page';
   data.view = 'entry-form';
@@ -138,6 +144,7 @@ theList.addEventListener('click', clickinTheList);
 
 function clickinTheList(event) {
   if (event.target.nodeName === 'I') {
+    theDeleteButton.className = 'delete-entry';
     data.view = 'entry-form';
     var theClickedLi = event.target.closest('li');
     data.editing = theClickedLi.id;
@@ -152,6 +159,39 @@ function clickinTheList(event) {
         theImgPreview.setAttribute('src', data.entries[i].photoURL);
         theEntryOrEditText.textContent = 'Edit Entry';
       }
+    }
+  }
+}
+
+theDeleteButton.addEventListener('click', clickDelete);
+
+function clickDelete(event) {
+  event.preventDefault();
+  theDeleteDiv.className = 'delete-conf-div';
+  theCloak.className = 'cloak-show';
+}
+
+theCancelDeleteButton.addEventListener('click', hideConfirms);
+
+function hideConfirms(event) {
+  theDeleteDiv.className = 'delete-conf-div hide-delete';
+  theCloak.className = 'cloak-show hide-delete';
+}
+
+theRealDeleteButton.addEventListener('click', adios);
+
+function adios(event) {
+  for (var y = 0; y < data.entries.length; y++) {
+    if (data.entries[y].entryId === parseInt(data.editing)) {
+      var adiosElement = document.querySelector('[data-entry-id="' + data.entries[y].entryId + '"]');
+      adiosElement.remove();
+      data.entries.splice(y, 1);
+      theFeedPage.className = 'feed-page';
+      theEntryForm.className = 'form-page hidden';
+      theDeleteDiv.className = 'delete-conf-div hide-delete';
+      theCloak.className = 'cloak-show hide-delete';
+      data.view = 'entries';
+      data.editing = null;
     }
   }
 }
