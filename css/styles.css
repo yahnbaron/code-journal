@@ -120,9 +120,10 @@ a:hover {
   text-align: center;
   position: fixed;
   border-radius: 5px;
-  top: 30%;
-  left: 20%;
+  top: 50%;
+  left: 50%;
   z-index: 2;
+  transform: translate(-50%, -50%);
   box-shadow: 5px 5px 5px black;
 }
 
