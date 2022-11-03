@@ -10,7 +10,7 @@ var theDeleteButton = document.querySelector('.delete-entry');
 var theDeleteDiv = document.querySelector('.delete-conf-div');
 var theCloak = document.querySelector('.cloak-show');
 var theCancelDeleteButton = document.querySelector('.cancel-delete');
-// var theRealDeleteButton = document.querySelector('.confirm-delete');
+var theRealDeleteButton = document.querySelector('.confirm-delete');
 
 theURLInput.addEventListener('input', updatePic);
 
@@ -176,4 +176,22 @@ theCancelDeleteButton.addEventListener('click', hideConfirms);
 function hideConfirms(event) {
   theDeleteDiv.className = 'delete-conf-div hide-delete';
   theCloak.className = 'cloak-show hide-delete';
+}
+
+theRealDeleteButton.addEventListener('click', adios);
+
+function adios(event) {
+  for (var y = 0; y < data.entries.length; y++) {
+    if (data.entries[y].entryId === parseInt(data.editing)) {
+      var adiosElement = document.querySelector('[data-entry-id="' + data.entries[y].entryId + '"]');
+      adiosElement.remove();
+      data.entries.splice(y, 1);
+      theFeedPage.className = 'feed-page';
+      theEntryForm.className = 'form-page hidden';
+      theDeleteDiv.className = 'delete-conf-div hide-delete';
+      theCloak.className = 'cloak-show hide-delete';
+      data.view = 'entries';
+      data.editing = null;
+    }
+  }
 }
