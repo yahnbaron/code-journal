@@ -7,6 +7,8 @@ var theFeedPage = document.querySelector('.feed-page');
 var theEntryForm = document.querySelector('.form-page');
 var theEntryOrEditText = document.querySelector('.entry-edit-text');
 var theDeleteButton = document.querySelector('.delete-entry');
+var theDeleteDiv = document.querySelector('.delete-conf-div');
+var theCloak = document.querySelector('.cloak-show');
 
 theURLInput.addEventListener('input', updatePic);
 
@@ -157,4 +159,12 @@ function clickinTheList(event) {
       }
     }
   }
+}
+
+theDeleteButton.addEventListener('click', clickDelete);
+
+function clickDelete(event) {
+  event.preventDefault();
+  theDeleteDiv.className = 'delete-conf-div';
+  theCloak.className = 'cloak-show';
 }

@@ -112,3 +112,41 @@ a:hover {
 .hide-delete {
   display: none;
 }
+
+.delete-conf-div {
+  height: 125px;
+  width: 450px;
+  background-color: white;
+  text-align: center;
+  position: fixed;
+  border-radius: 5px;
+  top: 30%;
+  left: 20%;
+  z-index: 2;
+  box-shadow: 5px 5px 5px black;
+}
+
+.delete-conf-div > button {
+  margin: 10px 60px;
+  padding: 8px 14px;
+  font-size: 16px;
+}
+
+.cancel-delete {
+  background-color: #b6b6b6;
+  color: #2a2a2a;
+}
+
+.confirm-delete {
+  background-color: #dc2625;
+}
+
+.cloak-show {
+  background-color: rgb(0 0 0 / 88.3%);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
